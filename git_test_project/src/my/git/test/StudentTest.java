@@ -4,5 +4,8 @@ public class StudentTest {
 	public static void main(String[] args) {
 		Student st = new Student("하하", 40);
 		System.out.println(st+"!!");
+		
+		Student st1 = new Student("하하", 40);
+		System.out.println(st1+"!!");
 	}
 }
