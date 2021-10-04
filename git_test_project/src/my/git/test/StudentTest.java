@@ -7,5 +7,8 @@ public class StudentTest {
 		
 		Student st1 = new Student("하하", 40);
 		System.out.println(st1+"!!");
+		
+		Student st2 = new Student("하하", 40);
+		System.out.println(st2+"!!");
 	}
 }
