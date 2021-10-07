@@ -31,34 +31,35 @@ public class DbIo {
                     list.add(string);
  
                 }
-                System.out.println(list);
  
             }
+            System.out.println(list);
 
             StringBuffer query = new StringBuffer();
-            query.append("INSERT INTO review VALUES (?,?,?,?)");
+            query.append("INSERT INTO review VALUES (?,?,?,?,?)");
             Connection conn = projectConn.getConn();
-            PreparedStatement pst = conn.prepareStatement(query.toString());
- 
-//            pst.setString(1, list.);
+            PreparedStatement pst = conn.prepareStatement(query.toString());         
             
-            
-            for (int i = 0; i < count; i++) { // 데이터 길이만큼
-                pst.setInt(1, i + 1);
-                pst.setString(2, list.get((3 * i) + 0));
-                pst.setString(3, list.get((3 * i) + 1));
-                pst.setString(4, list.get((3 * i) + 2));
-                pst.executeUpdate();
+            for (int i = 0; i < count; i++) {
+            	pst.setInt(1, 0);
+            	pst.setString(i+2, list.get((i)));             	
+               
+            }
+            int rows = pst.executeUpdate();
+            if(rows > 0) {
+            	System.out.println("데이터베이스 삽입 완료");
             }
                
-        } catch (FileNotFoundException e) {
+        }catch (FileNotFoundException e) {
             e.printStackTrace();
         }catch (IOException e) {
             e.printStackTrace();
-        } catch (SQLException e) {
+        }catch (SQLException e) {
             e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+        }catch (ClassNotFoundException e) {
 			e.printStackTrace();
+		}finally {
+			
 		}
     }
 }
