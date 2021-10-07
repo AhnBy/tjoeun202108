@@ -69,17 +69,22 @@ public class UserDaoImpl implements UserDao{
 	}
 
 	@Override
-	public List<UserDto> idBookselect(int id) throws ClassNotFoundException, SQLException {
-		String sql = "select u.name, b.bookNumber,b.title, u.rental_date, u.return_date from user u join book b on u.id = b.personNumber where u.id = ?";
+	public List<UserBookDto> idBookselect(int id) throws ClassNotFoundException, SQLException {
+		String sql = "select u.name, b.bookNumber,b.title,u.phoneNumber, u.rental_date, u.return_date from user u join book b on u.id = b.personNumber where u.id = ?";
 		
 		try(Connection conn = projectConn.getConn();
 			PreparedStatement pst = conn.prepareStatement(sql)){
 			pst.setInt(1, id);
 			try(ResultSet rs = pst.executeQuery()){
-				List<UserDto> userList = new ArrayList<UserDto>();
+				List<UserBookDto> userList = new ArrayList<UserBookDto>();
 				
 				while(rs.next()) {
-					userList.add(convert(rs));
+					userList.add(new UserBookDto(rs.getString("name"),
+							rs.getInt("bookNumber"),
+							rs.getString("title"),
+							rs.getString("phoneNumber"),
+							rs.getTimestamp("rental_date").toLocalDateTime(),
+							rs.getTimestamp("return_date").toLocalDateTime()));
 				}
 				return userList;
 			}

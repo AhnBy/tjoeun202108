@@ -12,7 +12,7 @@ public interface UserDao {
 	//2. 회원 번호로 select
 	public UserDto idSelect(int id)throws ClassNotFoundException, SQLException;
 	//3. 회원 번호로 책 조회 Selete
-	public List<UserDto>idBookselect(int id)throws ClassNotFoundException, SQLException;
+	public List<UserBookDto>idBookselect(int id)throws ClassNotFoundException, SQLException;
 	//4. 회원 정보수정 update
 	int userUpdate(UserDto user) throws ClassNotFoundException, SQLException;
 	//5. 회원 삭제 delete
